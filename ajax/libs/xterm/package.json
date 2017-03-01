@@ -1,0 +1,17 @@
+{
+  "name": "xterm",
+  "filename": "xterm.js",
+  "version": "2.3.2",
+  "description": "Full xterm terminal, in your browser",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sourcelair/xterm.js"
+  },
+  "keywords": [
+    "xterm",
+    "terminal",
+    "browser-tty"
+  ],
+  "author": "SourceLair",
+  "license": "MIT"
+}
