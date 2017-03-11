@@ -17,6 +17,7 @@ node_modules/
 /ajax/libs/crypto-js/release-3.1.2*
 /ajax/libs/trackpad-scroll-emulator/version_1.0
 /ajax/libs/date-fns/v.*
+/ajax/libs/react-quill/02e9da4/
 /ajax/libs/infusion/*-dev.*/
 /ajax/libs/punycode/2.0.*
 /ajax/libs/punycode/2.1.*

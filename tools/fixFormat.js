@@ -6,9 +6,9 @@ var fs = require('fs'),
   GitUrlParse = require('git-url-parse'),
   _ = require('lodash'),
   packages = glob.sync('./ajax/libs/*/package.json');
-  colors = require('colors'),
-  licenses = JSON.parse(fs.readFileSync('tools/license-list.json', 'utf8'));
-  isThere = require('is-there');
+colors = require('colors'),
+licenses = JSON.parse(fs.readFileSync('tools/license-list.json', 'utf8'));
+isThere = require('is-there');
 
 function fixFormat() {
   /*
@@ -21,7 +21,7 @@ function fixFormat() {
    *
    */
 
-  async.each(packages, function(item, callback) {
+  async.each(packages, function (item, callback) {
     var pkg = JSON.parse(fs.readFileSync(item, 'utf8'));
 
     deletePackageParts(pkg);
@@ -84,7 +84,7 @@ function fixFormat() {
         var repoUrlHttps = GitUrlParse(pkg.repository.url).toString('https');
         if (pkg.homepage == repoUrlHttps ||
             pkg.homepage == repoUrlHttps + '#readme' ||
-            pkg.homepage == repoUrlHttps + '.git' ) {
+            pkg.homepage == repoUrlHttps + '.git') {
           delete pkg.homepage;
         }
       }
@@ -154,7 +154,7 @@ function fixFormat() {
       for (var i in pkg.npmFileMap) {
         var npmbasePath = pkg.npmFileMap[i].basePath;
         if (npmbasePath && npmbasePath.length != 0 && ((typeof npmbasePath) == 'string')) {
-          npmbasePath = (npmbasePath).replace(/^\/+|\/+$/g , '');
+          npmbasePath = (npmbasePath).replace(/^\/+|\/+$/g, '');
           pkg.npmFileMap[i].basePath = npmbasePath;
         }
       }
@@ -172,16 +172,17 @@ function fixFormat() {
 
   function fixAutoupdate(pkg) {
     if (pkg.autoupdate) {
-      var basePath = pkg.autoupdate.basePath || ""
+      var basePath = pkg.autoupdate.basePath || '';
       if (basePath || pkg.autoupdate.files) {
         if (basePath && basePath.length !== 0) {
-          basePath = basePath.replace(/^\/+|\/+$/g , "");
+          basePath = basePath.replace(/^\/+|\/+$/g, '');
         }
+
         pkg.autoupdate.fileMap = [
           {
-              basePath: basePath || "",
+              basePath: basePath || '',
               files: pkg.autoupdate.files
-          }
+            }
         ];
         delete pkg.autoupdate.basePath;
         delete pkg.autoupdate.files;
@@ -194,7 +195,7 @@ function fixFormat() {
   }
 
   function adapt(licenseName) {
-    switch(licenseName) {
+    switch (licenseName) {
       case 'GPLv2':
       case 'GNU GPL v2':
         return 'GPL-2.0';
@@ -216,6 +217,7 @@ function fixFormat() {
     if (!pkg.filename) {
       return;
     }
+
     var orig = pkg.filename.split('.');
     var min = '';
     if (orig[orig.length - 2] !== 'min') {
@@ -225,16 +227,17 @@ function fixFormat() {
       temp.push(ext);
       min = temp.join('.');
     }
-    pkg.filename = pkg.filename.replace(/^\/+/g , "");
+
+    pkg.filename = pkg.filename.replace(/^\/+/g, '');
     if (min !== '' && isThere('./ajax/libs/' + pkg.name + '/' + pkg.version + '/' + min)) {
       pkg.filename = min;
     }
   };
 
   function removeKeysWithLeadingUnderscores(pkg) {
-    Object.keys(pkg).forEach(function(key) {
+    Object.keys(pkg).forEach(function (key) {
       if (key[0] === '_') {
-        delete pkg[key]
+        delete pkg[key];
       }
     });
   }

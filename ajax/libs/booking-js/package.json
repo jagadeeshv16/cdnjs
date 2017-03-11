@@ -1,6 +1,6 @@
 {
   "name": "booking-js",
-  "version": "1.9.3",
+  "version": "1.10.1",
   "filename": "booking.min.js",
   "description": "Make a beautiful embeddable booking widget in minutes",
   "repository": {

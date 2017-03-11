@@ -1,7 +1,7 @@
 {
   "name": "zingtouch",
   "filename": "zingtouch.min.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A modern JavaScript touch gesture library",
   "repository": {
     "type": "git",

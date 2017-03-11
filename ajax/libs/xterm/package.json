@@ -1,28 +1,29 @@
 {
-  name: "xterm",
-  filename: "xterm.js",
-  description: "Full xterm terminal, in your browser",
-  version: "2.3.2",
-  license: "MIT",
-  repository: {
-    type: "git",
-    url: "git+https://github.com/sourcelair/xterm.js"
+  "name":"xterm",
+  "filename":"xterm.js",
+  "version":"2.3.2",
+  "description":"Full xterm terminal, in your browser",
+  "repository":{
+    "type":"git",
+    "url":"git+https://github.com/sourcelair/xterm.js"
   },
-    author: {
-    name: "SourceLair"
-  },
-  keywords: [
+  "keywords":[
     "xterm",
     "terminal",
-    "browser-tty",
+    "browser-tty"
   ],
-  npmName: "xterm",
-  npmFileMap: [
+  "author":"SourceLair",
+  "license":"MIT",
+  "autoupdate":{
+    "source":"git",
+    "target":"https://github.com/sourcelair/xterm.js.git",
+    "fileMap":[
       {
-        basePath: "dist",
-        files: [
+        "basePath":"dist",
+        "files":[
           "**/*"
         ]
       }
     ]
+  }
 }

@@ -26,7 +26,7 @@
 
 This is the main repository to maintain the libraries' assets on CDNJS, for website, api, please refer to [new-website](https://github.com/cdnjs/new-website) repository, all the repositories can be found at [CDNJS](https://github.com/cdnjs/) organization on GitHub!
 
-CDNJS is a free and open source project to organize all the famous web front-end development resources and provide them to the developers with faster CDN intrastructure without usage limitation and fee. We want to help individual library/framework developers spread their projects, and help web developers to supercharge their websites! With the great and free CDN service, developers can focus on the project and website development, without spending time on worrying about how to setup a CDN for the project or website assets, we hope to make the web development eaiser, bring your websites and the WWW faster and safer.
+CDNJS is a free and open source project to organize all the famous web front-end development resources and provide them to the developers with faster CDN infrastructure without usage limitation and fee. We want to help individual library/framework developers spread their projects, and help web developers to supercharge their websites! With the great and free CDN service, developers can focus on the project and website development, without spending time on worrying about how to setup a CDN for the project or website assets, we hope to make the web development eaiser, bring your websites and the WWW faster and safer.
 
 If you love 💖 what we are doing and would like to help us make the project better, please consider to:
 

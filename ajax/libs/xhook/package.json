@@ -1,6 +1,6 @@
 {
   "name": "xhook",
-  "version": "1.3.5",
+  "version": "1.4.1",
   "filename": "xhook.min.js",
   "description": "Easily intercept and modify XHR request and response",
   "repository": {

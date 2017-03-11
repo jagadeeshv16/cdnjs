@@ -1,58 +1,58 @@
 var colors = require('colors');
-var rewire = require("rewire");
+var rewire = require('rewire');
 var fixFormatFile = rewire('../../tools/fixFormat.js');
 
 describe('fixFormat - tool to fix package.json file of libraries', () => {
   beforeEach(() => {
     this.packagesMock = [
       {
-        name: "jquery",
-        npmName: "jquery",
+        name: 'jquery',
+        npmName: 'jquery',
         npmFileMap: [
           {
-            basePath: "dist",
+            basePath: 'dist',
             files: [
-              "**/*"
+              '**/*'
             ]
           }
         ],
-        filename: "jquery.min.js",
-        version: "3.1.1",
-        description: "JavaScript library for DOM operations",
-        homepage: "http://jquery.com/",
+        filename: 'jquery.min.js',
+        version: '3.1.1',
+        description: 'JavaScript library for DOM operations',
+        homepage: 'http://jquery.com/',
         keywords: [
-          "jquery",
-          "library",
-          "ajax",
-          "framework",
-          "toolkit",
-          "popular"
+          'jquery',
+          'library',
+          'ajax',
+          'framework',
+          'toolkit',
+          'popular'
         ],
-        namespace: "jQuery",
+        namespace: 'jQuery',
         repository: {
-          type: "git",
-          url: "https://github.com/jquery/jquery"
+          type: 'git',
+          url: 'https://github.com/jquery/jquery'
         },
-        license: "MIT",
+        license: 'MIT',
         author: {
-          name: "jQuery Foundation and other contributors",
-          url: "https://github.com/jquery/jquery/blob/master/AUTHORS.txt"
+          name: 'jQuery Foundation and other contributors',
+          url: 'https://github.com/jquery/jquery/blob/master/AUTHORS.txt'
         }
       }
     ];
 
     function FakeFs() {
-      this.writeFile = function(_file, content) {
+      this.writeFile = function (_file, content) {
         this.writtenFile = content;
       };
 
-      this.writeFileSync = function(_file, content) {
+      this.writeFileSync = function (_file, content) {
         this.writtenFile = content;
       };
 
-      this.readFileSync = function(item, _encoding) {
+      this.readFileSync = function (item, _encoding) {
         return item;
-      }
+      };
     }
 
     this.fsMock = new FakeFs();
@@ -60,9 +60,9 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
     function FakeConsole() {
       this.logged = [],
 
-      this.log = function(arg) {
+      this.log = function (arg) {
         this.logged.push(arg);
-      }
+      };
     }
 
     this.consoleMock = new FakeConsole();
@@ -363,7 +363,7 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
 
     describe('When "author" is not an array', () => {
       beforeEach((done) => {
-        this.packagesMock[0].author = { 'name': 'Sebastian Bach' };
+        this.packagesMock[0].author = { name: 'Sebastian Bach' };
 
         fixFormatFile.__set__({
           fs: this.fsMock,
@@ -378,7 +378,7 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
         var result = JSON.parse(this.fsMock.writtenFile);
 
         expect(result.authors).toBeUndefined();
-        expect(result.author).toEqual({ 'name': 'Sebastian Bach' });
+        expect(result.author).toEqual({ name: 'Sebastian Bach' });
       });
     });
   });
@@ -516,9 +516,9 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
             }
           ]);
           expect(this.consoleMock.logged[0])
-            .toEqual('Library jquery has un-recognized license - Def not supported type: AHA!'.yellow)
+            .toEqual('Library jquery has un-recognized license - Def not supported type: AHA!'.yellow);
           expect(this.consoleMock.logged[1])
-            .toEqual('Library jquery has un-recognized license - This one too. boo-la-la!!'.yellow)
+            .toEqual('Library jquery has un-recognized license - This one too. boo-la-la!!'.yellow);
         });
       });
     });
@@ -597,7 +597,7 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
           this.packagesMock[0].license = {
               name: 'first license',
               type: 'MIT'
-            }
+            };
 
           fixFormatFile.__set__({
             fs: this.fsMock,
@@ -620,7 +620,7 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
           this.packagesMock[0].license = {
               name: 'first license',
               type: 'Definitely not this one!'
-            }
+            };
 
           fixFormatFile.__set__({
             fs: this.fsMock,
@@ -671,13 +671,12 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
         beforeEach((done) => {
           this.packagesMock[0].npmFileMap = [
             {
-              basePath: "/dist/something"
+              basePath: '/dist/something'
             },
             {
-              basePath: "dist/something-else/"
+              basePath: 'dist/something-else/'
             }
           ];
-
 
           fixFormatFile.__set__({
             fs: this.fsMock,
@@ -692,8 +691,8 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
           var result = JSON.parse(this.fsMock.writtenFile);
 
           expect(result.npmFileMap).toEqual([
-            { basePath: "dist/something" },
-            { basePath: "dist/something-else" }
+            { basePath: 'dist/something' },
+            { basePath: 'dist/something-else' }
           ]);
         });
       });
@@ -706,7 +705,6 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
         this.packagesMock[0].keywords = [
           'something', 'something', 'oops', 'oops'
         ];
-
 
         fixFormatFile.__set__({
           fs: this.fsMock,
@@ -731,7 +729,6 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
         this.packagesMock[0].keywords = [
           'something', 'no duplicates here'
         ];
-
 
         fixFormatFile.__set__({
           fs: this.fsMock,
@@ -845,12 +842,12 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
   describe('When package filename does not contain "min"', () => {
     describe('When minified js file exists in the package folder', () => {
       beforeEach((done) => {
-        this.packagesMock[0].filename = 'jquery.js'
+        this.packagesMock[0].filename = 'jquery.js';
 
         fixFormatFile.__set__({
           fs: this.fsMock,
           packages: this.packagesMock.map((pkg) => (JSON.stringify(pkg))),
-          isThere: function() { return true }
+          isThere: function () { return true; }
         });
 
         fixFormatFile.fixFormat();
@@ -866,12 +863,12 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
 
     describe('When minified js file does not exist in the package folder', () => {
       beforeEach((done) => {
-        this.packagesMock[0].filename = 'jquery.js'
+        this.packagesMock[0].filename = 'jquery.js';
 
         fixFormatFile.__set__({
           fs: this.fsMock,
           packages: this.packagesMock.map((pkg) => (JSON.stringify(pkg))),
-          isThere: function() { return false }
+          isThere: function () { return false; }
         });
 
         fixFormatFile.fixFormat();
@@ -888,12 +885,12 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
 
   describe('When package filename contains "min"', () => {
     beforeEach((done) => {
-      this.packagesMock[0].filename = 'jquery.min.js'
+      this.packagesMock[0].filename = 'jquery.min.js';
 
       fixFormatFile.__set__({
         fs: this.fsMock,
         packages: this.packagesMock.map((pkg) => (JSON.stringify(pkg))),
-        isThere: function() { return true }
+        isThere: function () { return true; }
       });
 
       fixFormatFile.fixFormat();
@@ -912,7 +909,7 @@ describe('fixFormat - tool to fix package.json file of libraries', () => {
       fixFormatFile.__set__({
         fs: this.fsMock,
         packages: this.packagesMock.map((pkg) => (JSON.stringify(pkg))),
-        isThere: function() { return true }
+        isThere: function () { return true; }
       });
 
       fixFormatFile.fixFormat();

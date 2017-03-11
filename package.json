@@ -30,9 +30,10 @@
     "tarball-extract": "^0.0.3"
   },
   "devDependencies": {
-    "doctoc": "^1.2.0",
     "JSV": "^4.0.2",
+    "doctoc": "^1.2.0",
     "jasmine": "^2.5.2",
+    "jscs": "^3.0.7",
     "jslint": "^0.10.1",
     "rewire": "^2.5.2",
     "vows-si": "^0.7.1"

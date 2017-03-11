@@ -1,5 +1,5 @@
-var colors = require("colors");
-var glob = require("glob");
+var colors = require('colors');
+var glob = require('glob');
 
 function libsToRun() {
   var onlyRunLib,

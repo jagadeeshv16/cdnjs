@@ -30,6 +30,7 @@ Here is an example of `.git/info/sparse-checkout`:
 /*.json
 /*.sh
 /*.js
+/.jscsrc
 /ajax/libs/jquery/*
 #/ajax/libs/*/package.json // for tools/createSparseCheckoutConfig.js
 ```

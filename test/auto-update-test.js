@@ -1,111 +1,116 @@
-var assert = require("assert");
-var path = require("path");
-var vows = require("vows-si");
+var assert = require('assert');
+var path = require('path');
+var vows = require('vows-si');
 var _ = require('lodash');
 var au = require('./../auto-update');
 
 var suite = vows.describe('NPM Auto Update - stand alone methods');
 suite.addBatch({
   'npm name validation': {
-    "topic": ["floatthead", "../evil"],
-    'This is a valid npm name': function(arr) {
+    topic: ['floatthead', '../evil'],
+    'This is a valid npm name': function (arr) {
       assert.equal(au.invalidNpmName(arr[0]), false);
     },
-    'This is an invalid npm name': function(arr) {
+
+    'This is an invalid npm name': function (arr) {
       assert.equal(au.invalidNpmName(arr[1]), true);
     }
   },
   'npmFileMap validation - simple': {
-    "topic": {npmFileMap: [
+    topic: { npmFileMap: [
       {
-        basePath: "/dist/",
+        basePath: '/dist/',
         files: [
-          "*.js",
-          "blee/blah//script.js",
-          "blee/blah//script.min.js",
-          "styles.css",
-          "/test/**/*.*"
+          '*.js',
+          'blee/blah//script.js',
+          'blee/blah//script.min.js',
+          'styles.css',
+          '/test/**/*.*'
         ]
       }
-    ]},
-    'This is a valid npm file map': function(obj) {
+    ] },
+    'This is a valid npm file map': function (obj) {
       assert.equal(au.isValidFileMap(obj), true);
     },
-    'file paths are ok too': function(obj) {
+
+    'file paths are ok too': function (obj) {
       var map = obj.npmFileMap[0];
       var testFn = au.isAllowedPathFn(path.join('someplace', map.basePath));
-      assert.equal(testFn.apply(null, _.map(map.files, function(f) {
-        return path.join("someplace", map.basePath, f);
+      assert.equal(testFn.apply(null, _.map(map.files, function (f) {
+        return path.join('someplace', map.basePath, f);
       })), true);
     }
   },
   'npmFileMap validation - arrays': {
-    "topic": {npmFileMap: [
+    topic: { npmFileMap: [
       {
-        basePath: "dist",
+        basePath: 'dist',
         files: [
-          "*.js",
-          "blee/blah//script.js",
-          "blee/blah//script.min.js",
-          "styles.css",
-          "/test/**/*.*"
+          '*.js',
+          'blee/blah//script.js',
+          'blee/blah//script.min.js',
+          'styles.css',
+          '/test/**/*.*'
         ]
       },
       {
-        basePath: "",
+        basePath: '',
         files: [
-          "test.css",
-          "/blee.js",
-          "this_is_ok_right_now.zip"
+          'test.css',
+          '/blee.js',
+          'this_is_ok_right_now.zip'
         ]
       },
       {
-        basePath: "",
+        basePath: '',
         files: [
-          "*"
+          '*'
         ]
       }
-    ]},
-    'valid array of file maps': function(obj) {
+    ] },
+    'valid array of file maps': function (obj) {
       assert.equal(au.isValidFileMap(obj), true);
     },
-    'these paths are ok too': function(obj) {
+
+    'these paths are ok too': function (obj) {
       var map = obj.npmFileMap[0];
       var testFn = au.isAllowedPathFn(path.join('someplace', map.basePath));
-      assert.equal(testFn.apply(null, _.map(map.files, function(f) {
-        return path.join("someplace", map.basePath, f);
+      assert.equal(testFn.apply(null, _.map(map.files, function (f) {
+        return path.join('someplace', map.basePath, f);
       })), true);
     },
-    'these paths are also allowed': function(obj) {
+
+    'these paths are also allowed': function (obj) {
       var map = obj.npmFileMap[1];
       var testFn = au.isAllowedPathFn(path.join('someplace', map.basePath));
-      assert.equal(testFn.apply(null, _.map(map.files, function(f) {
-        return path.join("someplace", map.basePath, f);
+      assert.equal(testFn.apply(null, _.map(map.files, function (f) {
+        return path.join('someplace', map.basePath, f);
       })), true);
     }
 
   },
   'npmFileMap validation - invalid 1': {
-    "topic": {npmFileMap: [
+    topic: { npmFileMap: [
       {
-        basePath: "dist",
+        basePath: 'dist',
         files: [
-          "*.js",
-          "blee/blah/../../../script.js",
-          "/../../../../../../../../../../etc/hosts",
-          "styles.css",
-          "/test/**/*.*"
+          '*.js',
+          'blee/blah/../../../script.js',
+          '/../../../../../../../../../../etc/hosts',
+          'styles.css',
+          '/test/**/*.*'
         ]
       }
-    ]},
-    'this npm filemap is doing evil things': function(obj) {
+    ] },
+    'this npm filemap is doing evil things': function (obj) {
       assert.equal(au.isValidFileMap(obj), false);
     },
-    'these paths are bad': function(obj) {
+
+    'these paths are bad': function (obj) {
       var map = obj.npmFileMap[0];
       var testFn = au.isAllowedPathFn(path.join('someplace', map.basePath));
-      assert.equal(testFn.apply(null, _.map(map.files, function(f) {
-        return path.join("someplace", map.basePath, f);
+      assert.equal(testFn.apply(null, _.map(map.files, function (f) {
+        return path.join('someplace', map.basePath, f);
       })), false);
     }
   }
